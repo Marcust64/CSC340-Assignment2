@@ -12,6 +12,8 @@ public class ApIdemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApIdemoApplication.class, args);
+                character();
+                System.exit(0);
 	}
         
         public static void character(){
@@ -23,12 +25,13 @@ public class ApIdemoApplication {
             String jSonName = restTemplate.getForObject(url, String.class);
             JsonNode root = mapper.readTree(jSonName);
             
+            //gets characters name 
             String name = root.findValue("name").asText();
+            //gets the characters type of species
+            String type = root.findValue("type").asText();
             
-            String gender = root.findValue("price_usd").asText();
-            
-            System.out.println("Coin: " + name);
-            System.out.println("Price: " + gender);
+            System.out.println("Name: " + name);
+            System.out.println("Type: " + type);
 
         } catch (JsonProcessingException ex) {
             System.out.println("error in character information");
